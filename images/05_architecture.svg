@@ -78,7 +78,7 @@
   <text class="s" x="635" y="286">응답자 자격과 응답 형식 확인</text>
 
   <rect class="box-dashed" x="820" y="215" width="160" height="90" rx="6"/>
-  <text class="t" x="900" y="240">만료 점검기</text>
+  <text class="t" x="900" y="240">타임아웃 처리</text>
   <text class="s" x="900" y="261">주기적으로 도는 배경 작업</text>
   <text class="s" x="900" y="279">기한이 지난 run을</text>
   <text class="s" x="900" y="296">만료로 처리해 재개</text>
