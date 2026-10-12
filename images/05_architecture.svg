@@ -73,7 +73,7 @@
   <text class="c" x="192" y="420">⑤ 체크포인트 저장, pause면 멈춤</text>
 
   <rect class="box" x="480" y="215" width="310" height="90" rx="6"/>
-  <text class="t" x="635" y="245">재개 처리기</text>
+  <text class="t" x="635" y="245">응답 처리</text>
   <text class="s" x="635" y="267">응답을 받아 멈춘 run을 이어 감</text>
   <text class="s" x="635" y="286">응답자 자격과 응답 형식 확인</text>
 
