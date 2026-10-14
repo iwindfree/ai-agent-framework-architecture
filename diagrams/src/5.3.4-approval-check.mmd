@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant P as approve_refund 노드
+    participant X as 실행기와 체크포인트
+    participant R as 팀장
+    participant E as execute_refund 노드
+    participant C as 승인 확인 미들웨어
+    participant T as 도구 어댑터
+    P->>X: wait(approval, 승인 대상 = payment.refund { A-1029, 89000, original })
+    X-->>R: 승인 요청
+    R->>X: 응답(ok = true)
+    X->>X: 응답을 받은 요청에 기록
+    E->>C: payment.refund { A-1029, 89000, original }
+    C->>X: 응답을 받은 요청 가운데 ok이고 승인 대상이 같은 것을 찾음
+    alt 찾음
+        C->>T: 호출을 진행
+    else 없거나 내용이 다름
+        C-->>E: 거부(정책 거부)
+    end

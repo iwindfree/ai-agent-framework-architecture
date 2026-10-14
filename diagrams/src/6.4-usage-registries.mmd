@@ -1,0 +1,7 @@
+flowchart LR
+    COMP[compile] --> WS[(workflow_specs)]
+    COMP -.-> TL[(tools)]
+    LOOP[실행 루프] -.-> AV[(active_versions)]
+    LOOP -.-> WS
+    TOOLMW[권한, 입력 검증, 승인 확인 미들웨어] -.-> TL
+    DEC[결정 노드의 도구 목록] -.-> TL

@@ -1,0 +1,105 @@
+erDiagram
+    run_index ||--|{ checkpoints : "run_id"
+    run_index ||--o{ requests : "run_id"
+    run_index ||--o| locks : "run의 잠금(key = run_id)"
+    run_index ||--o{ idempotency_keys : "run_id"
+    sessions ||--o{ session_runs : "session_id"
+    sessions ||--o{ messages : "session_id"
+    session_runs }o..|| run_index : "run_id"
+    workflow_specs ||--o{ active_versions : "name, version"
+    workflow_specs ||..o{ run_index : "workflow_name, workflow_version"
+    workflow_specs }o..o{ tools : "명세의 uses"
+
+    checkpoints {
+        string run_id PK
+        int seq PK
+        string completed_node
+        string status "running, paused, done, failed, blocked, cancelled"
+        string next_node
+        json state
+        json request "멈춘 경우. 승인 대상 포함"
+        json answered_requests "승인 기록"
+        json parallel "병렬 진행 상태"
+        json back_edge_counts
+        json budget_used
+        bytes placeholder_map "대체 표시 대응표. 암호화"
+        json side_effect_calls "바깥을 바꾼 호출"
+        string workflow_name
+        string workflow_version
+        bytes signature
+        string key_id "서명 키"
+    }
+    run_index {
+        string run_id PK
+        string workflow_name
+        string workflow_version
+        string status
+        int last_seq
+        timestamp updated_at
+    }
+    requests {
+        string request_id PK
+        string run_id FK
+        string kind
+        string responder
+        timestamp deadline
+        string status "waiting, answered. run이 끝나면 행을 지운다"
+    }
+    locks {
+        string key PK "run_id 또는 도구 이름:잠금 키 값"
+        string owner
+        timestamp expires_at
+        int version
+    }
+    idempotency_keys {
+        string key PK
+        string run_id FK
+        string tool
+        timestamp sent_at
+        json result
+    }
+    sessions {
+        string session_id PK
+        string user_id
+        json summary "요약 압축 결과"
+        int version
+        timestamp updated_at
+    }
+    session_runs {
+        string session_id PK
+        string run_id PK
+        string workflow_name
+        string workflow_version
+        string status "run 상태와 같은 값"
+        string waiting_for
+        string request_id
+        string result_summary
+    }
+    messages {
+        string session_id PK
+        int seq PK
+        string role
+        string content
+        string run_id
+    }
+    workflow_specs {
+        string name PK
+        string version PK
+        string code_hash
+        json spec
+        timestamp created_at
+    }
+    active_versions {
+        string name PK
+        string version PK
+        int share
+    }
+    tools {
+        string name PK
+        string version PK
+        string side_effect
+        string undo
+        string status "검토 전, 검토 완료, 사용 중지"
+        json metadata
+        string reviewed_hash "외부 도구의 고정 해시"
+    }

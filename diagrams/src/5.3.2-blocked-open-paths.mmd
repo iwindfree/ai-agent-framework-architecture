@@ -1,0 +1,10 @@
+flowchart TB
+    subgraph X["막힌 길: 모델이 직접 고른다"]
+        direction LR
+        A1[decide<br/>tool: payment.refund] --> A2[act<br/>uses에 payment.refund가 없음] --> A3[거부]
+    end
+    subgraph O["열린 길: 모델의 판단이 workflow를 따라간다"]
+        direction LR
+        B1[decide<br/>action: route] --> B2[route<br/>주문 환불 workflow로] --> B7[의도 분류] --> B6[주문 확인] --> B3[환불액 계산<br/>코드로 계산] --> B4[팀장 승인 대기] --> B5[환불 실행<br/>고정 호출]
+    end
+    X ~~~ O

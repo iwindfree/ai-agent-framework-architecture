@@ -1,0 +1,5 @@
+flowchart LR
+    D[decide<br/>tools_for = act_lookup, act_pickup] -->|조회 도구를 고름| A1[act_lookup<br/>order.get, shipment.track, product.search]
+    D -->|수거 예약을 고름| A2[act_pickup<br/>pickup.schedule]
+    A1 -.->|최대 5번| D
+    A2 -.->|최대 1번| D

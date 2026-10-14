@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant L as 실행 루프
+    participant F as 항공편 검색
+    participant H as 호텔 검색
+    participant S as 체크포인트 저장소
+    L->>S: 병렬 묶음 시작 기록
+    par 동시에 실행
+        L->>F: 같은 State로 실행
+        F-->>L: { flights }
+        L->>S: 진행 상태에 결과 추가
+    and
+        L->>H: 같은 State로 실행
+        H-->>L: { hotels }
+        L->>S: 진행 상태에 결과 추가
+    end
+    L->>L: 남은 노드가 없으면 명세의 합류 에지로 다음 노드 결정, State에 반영
+    L->>S: 합류 기록 저장

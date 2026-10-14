@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant N as 노드 함수
+    participant W as 미들웨어 체인
+    participant M as 모델 어댑터
+    participant P as 모델 제공자
+    N->>W: model.call(별칭, prompt, input, history, 출력 형식)
+    W->>M: 공통 처리(추적, 비용, 마스킹)를 거친 호출
+    M->>M: 별칭을 실제 모델로 바꾸고 메시지를 조립함
+    M->>P: 호출
+    opt 제공자 장애
+        M->>P: 대체 모델로 호출
+    end
+    P-->>M: 응답
+    M->>M: 출력 형식 검사
+    opt 형식이 맞지 않음
+        M->>P: 앞의 응답과 오류 내용을 붙여 다시 요청(최대 2번)
+    end
+    M-->>W: 형식 검사를 통과한 출력
+    W-->>N: 출력

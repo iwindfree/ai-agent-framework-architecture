@@ -1,0 +1,16 @@
+flowchart TB
+    subgraph A1["응용 서버 1"]
+        C1[Agent 코드] --> E1[실행기 라이브러리] --> R1[저장소 구현<br/>관계형 DB용]
+    end
+    subgraph A2["응용 서버 2"]
+        C2[Agent 코드] --> E2[실행기 라이브러리] --> R2[저장소 구현<br/>관계형 DB용]
+    end
+    subgraph DB["관계형 DB 서버(공유)"]
+        direction LR
+        T1[(체크포인트 저장소<br/>checkpoints, run_index,<br/>requests, locks, idempotency_keys)]
+        T2[(세션 저장소<br/>sessions, session_runs, messages)]
+        T3[(workflow 레지스트리<br/>workflow_specs, active_versions)]
+        T4[(도구 레지스트리<br/>tools)]
+    end
+    R1 -->|SQL| DB
+    R2 -->|SQL| DB

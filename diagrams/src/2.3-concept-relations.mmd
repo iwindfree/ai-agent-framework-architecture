@@ -1,0 +1,5 @@
+flowchart LR
+    W[workflow<br/>order_refund] -->|고칠 때마다 하나| V[workflow 버전<br/>1.2.0의 코드와 명세]
+    V -->|실행할 때마다 하나| R[run<br/>run-7f3a]
+    R -->|노드가 끝나거나 멈출 때마다 하나| C[체크포인트<br/>seq 1~6]
+    S[세션<br/>sess-91] -->|한 사용자의 run들을 묶음| R

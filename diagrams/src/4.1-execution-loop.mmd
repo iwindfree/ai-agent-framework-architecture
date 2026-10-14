@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant L as 실행 루프
+    participant N as 노드 함수(미들웨어 경유)
+    participant S as 체크포인트 저장소
+    loop 노드마다
+        L->>N: 노드 실행
+        N-->>L: State의 변경분
+        L->>L: 변경분 반영 → 다음 노드 결정 → 예산 확인
+        L->>S: 체크포인트 저장(State, 다음 노드, 반복 횟수, 사용 예산)
+    end
+    Note over L,S: 다음 노드가 없으면 마지막 체크포인트를 done 상태로 저장하고 끝냄

@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant T as 타임아웃 처리
+    participant S as 체크포인트 저장소
+    participant X as 실행기
+    loop 1분마다
+        T->>S: 기한이 지난 대기 중인 run 조회
+        T->>X: 만료 응답으로 재개(expired, ok = false)
+        X->>X: 멈췄던 노드를 다시 실행. 만료에 맞는 길로 감(예: 취소, 상위 승인자)
+    end

@@ -1,0 +1,7 @@
+flowchart LR
+    S((시작)) --> T[decide<br/>결정 노드<br/>모델이 다음 행동을 고름]
+    T -->|도구 호출| A[act<br/>실행 노드<br/>model_chooses]
+    A -.->|결과를 보고 다시 판단<br/>최대 5번| T
+    T -->|답변| R[reply<br/>답변 발송]
+    T -->|업무로 넘김| H[route<br/>업무 workflow로]
+    A -->|상한 초과| X[handoff<br/>상담원 이관]

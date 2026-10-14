@@ -1,0 +1,11 @@
+flowchart LR
+    S((시작)) --> A[classify<br/>의도 분류]
+    A -->|환불| B[check_order<br/>주문 확인]
+    A -->|그 밖| H[handoff<br/>상담원 이관]
+    B -->|찾음| C[calc_refund<br/>환불액 계산]
+    B -.->|못 찾음, 최대 2번| Q[ask_customer<br/>주문 번호 되묻기]
+    Q --> B
+    B -->|상한 초과| H
+    C --> P[approve_refund<br/>담당자 승인 대기]
+    P -->|승인| E[execute_refund<br/>환불 실행]
+    P -->|반려| H

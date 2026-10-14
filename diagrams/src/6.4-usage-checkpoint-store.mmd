@@ -1,0 +1,13 @@
+flowchart LR
+    LOOP[실행 루프] --> CP[(checkpoints)]
+    LOOP --> RI[(run_index)]
+    LOOP --> RQ[(requests)]
+    LOOP --> LK[(locks)]
+    RESP[응답 처리] -.-> RQ
+    RESP -.-> CP
+    TIME[타임아웃 처리] -.-> RQ
+    REC[복구] -.-> RI
+    OPS[운영 도구] -.-> RI
+    OPS -.-> CP
+    LOCKMW[잠금 미들웨어] --> LK
+    IDEM[멱등성 키 미들웨어] --> IK[(idempotency_keys)]

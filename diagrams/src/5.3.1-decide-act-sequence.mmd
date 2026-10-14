@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant L as 실행 루프
+    participant D as decide 노드
+    participant F as 프레임워크(모델 호출 경로)
+    participant M as 모델
+    participant A as act 노드
+    Note over L: run을 시작할 때 workflow 명세를 이미 읽어 둠
+    L->>D: decide 실행
+    D->>F: model.call(질문, 지금까지의 결과, 출력 형식)
+    F->>F: 명세에서 decide의 tools_for(act)를 찾고, act의 uses를 읽고,<br/>레지스트리에서 각 도구의 설명과 입력 형식을 찾아 호출에 붙임
+    F->>M: 질문, 결과, 도구 목록(order.get, shipment.track, product.search)
+    M-->>F: { action: call_tool, tool: shipment.track, input: { order_id: A-2210 } }
+    F-->>D: 출력 형식 검사를 통과한 결정
+    D-->>L: 결정을 State에 적음
+    L->>L: 체크포인트 저장, decide의 조건부 에지가 고른 도구를 가진 act로 보냄
+    L->>A: act 실행
+    A->>A: tools.call(shipment.track, ...)
+    A-->>L: 결과를 State에 붙임
+    L->>L: 체크포인트 저장, 되돌아가는 에지로 decide로 감
+    L->>D: decide 다시 실행. 이번에는 배송 결과를 보고 답변을 정함

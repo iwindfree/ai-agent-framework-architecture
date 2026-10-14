@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant N as 노드 함수
+    participant O as 바깥 묶음(추적)
+    participant D as Agent 개발자의 미들웨어
+    participant I as 안쪽 묶음
+    participant T as 도구 어댑터
+    N->>O: tools.call(payment.refund, 입력)
+    O->>O: 시작 시각 기록
+    O->>D: 호출
+    D->>D: 업무 태그 붙이기 등
+    D->>I: 호출(Agent 개발자가 고친 입력일 수 있음)
+    I->>I: 대체 표시 복원 → 권한 → 입력 검증 → 승인 확인 → 잠금 → 멱등성 키
+    I->>T: 검사를 통과한 입력 그대로
+    T-->>I: 결과
+    I-->>D: 결과(잠금 해제)
+    D-->>O: 결과
+    O->>O: 소요 시간, 결과를 가려서 기록
+    O-->>N: 결과

@@ -1,0 +1,9 @@
+flowchart LR
+    SESS[세션 기록 미들웨어] --> SE[(sessions)]
+    SUM[요약 압축 미들웨어] --> SE
+    SESS --> SR[(session_runs)]
+    SESS --> MS[(messages)]
+    APP[응용 서버] -.-> SR
+    MODEL[모델 호출의 이전 대화] -.-> MS
+    APP --> SR
+    MODEL -.-> SE

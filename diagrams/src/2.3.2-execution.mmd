@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant A as 응용 서버
+    participant L as 실행 루프
+    participant M as 미들웨어와 어댑터
+    participant S as 체크포인트 저장소
+    A->>L: 실행 요청 start(workflow, 입력)
+    loop 노드마다
+        L->>M: 노드 실행. 모델과 도구 호출은 미들웨어를 거침
+        M-->>L: State의 변경분
+        L->>L: State에 반영, 에지로 다음 노드 결정, 예산 확인
+        L->>S: 체크포인트 저장
+    end
+    L-->>A: 완료와 최종 State

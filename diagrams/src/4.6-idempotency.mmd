@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant A as 서버 A
+    participant P as 결제 시스템
+    participant B as 서버 B
+    A->>P: 환불 요청(키 run-7f3a/5/execute_refund/refund)
+    Note over A: 체크포인트 저장 전에 서버 A가 죽음
+    B->>B: 마지막 체크포인트에서 환불 노드를 다시 실행
+    B->>P: 환불 요청(같은 키)
+    alt 첫 요청이 처리되지 않았다
+        P-->>B: 지금 환불을 실행하고 결과를 돌려줌
+    else 첫 요청이 이미 처리되었다
+        P-->>B: 실행하지 않고 처음의 결과를 돌려줌
+    end
+    Note over B: 어느 경우든 환불은 한 번
