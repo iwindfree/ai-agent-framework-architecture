@@ -62,6 +62,7 @@ LLM에게 Agent의 동작을 자유롭게 맡기면 결과를 재현할 수 없�
 | 파일 | 내용 |
 |---|---|
 | [00.architecture.md](00.architecture.md) | 설계서 본문(0~7장)과 부록 A |
+| [01.maf-dotnet-dev-guide.md](01.maf-dotnet-dev-guide.md) | 설계서를 Microsoft Agent Framework(.NET)로 구현할 때의 개발 가이드 |
 | [images/05_architecture.svg](images/05_architecture.svg) | 2.1절의 계층형 구성도 |
 | [images/diagrams/](images/diagrams) | 본문의 다이어그램 30개(SVG). 파일 이름은 절 번호로 시작한다 |
 | [diagrams/src/](diagrams/src) | 다이어그램의 mermaid 원본. 고친 뒤 SVG를 다시 만든다 |
