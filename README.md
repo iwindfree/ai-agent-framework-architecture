@@ -65,3 +65,4 @@ LLM에게 Agent의 동작을 자유롭게 맡기면 결과를 재현할 수 없�
 | [images/05_architecture.svg](images/05_architecture.svg) | 2.1절의 계층형 구성도 |
 | [images/diagrams/](images/diagrams) | 본문의 다이어그램 30개(SVG). 파일 이름은 절 번호로 시작한다 |
 | [diagrams/src/](diagrams/src) | 다이어그램의 mermaid 원본. 고친 뒤 SVG를 다시 만든다 |
+| [AI_Agent_Workflow_Framework_Summary.pptx](AI_Agent_Workflow_Framework_Summary.pptx) | 시험 참고용 요약 슬라이드(69장). 다이어그램과 부록 A의 API 명세 포함 |
