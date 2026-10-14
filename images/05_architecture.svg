@@ -28,7 +28,7 @@
   <text class="group-title" x="390" y="54">Agent 개발자의 코드</text>
   <rect class="box" x="170" y="66" width="140" height="90" rx="6"/>
   <text class="t" x="240" y="96">Agent 호출</text>
-  <text class="s" x="240" y="118">run · stream · resume</text>
+  <text class="s" x="240" y="118">start · resume</text>
   <text class="s" x="240" y="137">응용 서버가 호출</text>
   <rect class="box" x="320" y="66" width="140" height="90" rx="6"/>
   <text class="t" x="390" y="96">workflow 빌더</text>
@@ -70,7 +70,7 @@
   <rect class="chip" x="180" y="369" width="240" height="26" rx="4"/>
   <text class="c" x="192" y="387">④ 예산 초과 확인</text>
   <rect class="chip" x="180" y="402" width="240" height="26" rx="4"/>
-  <text class="c" x="192" y="420">⑤ 체크포인트 저장, pause면 멈춤</text>
+  <text class="c" x="192" y="420">⑤ 체크포인트 저장, 대기면 멈춤</text>
 
   <rect class="box" x="480" y="215" width="310" height="90" rx="6"/>
   <text class="t" x="635" y="245">응답 처리</text>
