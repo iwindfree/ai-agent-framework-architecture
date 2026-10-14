@@ -1,0 +1,12 @@
+flowchart LR
+    S((시작)) --> D[decide<br/>결정 노드<br/>tools_for = act]
+    D -->|도구 호출| A[act<br/>실행 노드, model_chooses<br/>order.get, shipment.track]
+    A -.->|다시 판단, 최대 5번| D
+    A -->|상한 초과| H[handoff<br/>상담원 이관]
+    D -->|답변| R[reply<br/>답변 발송]
+    D -->|환불 요청| C[check_order<br/>uses = order.get]
+    C -->|찾음| P[approve_refund<br/>waits = approval]
+    C -->|못 찾음| H
+    C -.->|on_error| H
+    P -->|승인| E[execute_refund<br/>uses = payment.refund]
+    P -->|반려| H
