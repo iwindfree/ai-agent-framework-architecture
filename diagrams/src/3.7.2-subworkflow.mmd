@@ -1,0 +1,10 @@
+flowchart TB
+    S((시작)) --> C[classify<br/>의도 분류]
+    C -->|refund| R
+    C -->|inquiry| A[reply<br/>답변 발송]
+    C -->|그 밖| H[handoff<br/>상담원 이관]
+    subgraph R["refund: 하위 workflow"]
+        direction LR
+        I[입력<br/>user_message, order_number] --> W[order_refund 1.2.0, 별도의 run<br/>주문 확인 → 환불액 계산 → 승인 → 환불 실행] --> O[출력<br/>refund_result]
+    end
+    R --> A
